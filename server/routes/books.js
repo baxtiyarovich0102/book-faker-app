@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
     reviews: parseFloat(reviews)
   })
 
-  res.json(books)
+  res.json({ books }) // ✅ frontendda data.books ko‘rinishida keladi
 })
 
 export default router

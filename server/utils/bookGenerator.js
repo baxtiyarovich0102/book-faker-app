@@ -1,7 +1,6 @@
 import seedrandom from "seedrandom"
 import { Faker, en, de, ja } from "@faker-js/faker"
 
-// region -> locale mapping
 const LOCALES = {
   en_US: en,
   de_DE: de,
@@ -10,21 +9,18 @@ const LOCALES = {
 
 export function generateBooks({ seed, page, region, likes, reviews }) {
   const localeData = LOCALES[region] || en
-
   const books = []
+
   const baseSeed = seed + "-" + page
   const rng = seedrandom(baseSeed)
 
   for (let i = 0; i < 20; i++) {
     const index = (page - 1) * 10 + i + 1
-
-    // har bir kitob uchun alohida seed hosil qilamiz
     const bookSeed = `${baseSeed}-${i}`
     const bookRng = seedrandom(bookSeed)
 
     const faker = new Faker({
       locale: [localeData],
-      // har bir faker uchun random source — seedrandom orqali
       random: bookRng,
     })
 

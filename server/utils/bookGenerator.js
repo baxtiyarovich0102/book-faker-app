@@ -29,11 +29,11 @@ export function generateBooks({ seed, page, region, likes, reviews }) {
     // ISBN 10 belgidan iborat katta harf va raqamlar
     const isbn = faker.string.alphanumeric(10).toUpperCase()
 
-    // Title - 3 so‘zdan iborat so‘zlar (locale ga mos)
+    // Title - 3 so'zdan iborat so'zlar (locale ga mos)
     const title = faker.lorem.words(3)
 
-    // Mualliflar - 2 ta to‘liq ism (locale ga mos)
-    const authors = [faker.name.fullName(), faker.name.fullName()]
+    // Mualliflar - 2 ta to'liq ism (locale ga mos)
+    const authors = [faker.person.fullName(), faker.person.fullName()] // ✅ O'zgartirildi
 
     // Nashriyot
     const publisher = faker.company.name()
@@ -51,7 +51,7 @@ export function generateBooks({ seed, page, region, likes, reviews }) {
     const bookLikes = generateFractionalAmount(likes, rng)
     const reviewCount = generateFractionalAmount(reviews, rng)
 
-    // Sharhlar ro‘yxati, har biri muallif va text bilan
+    // Sharhlar ro'yxati, har biri muallif va text bilan
     const reviewsArr = Array.from({ length: reviewCount }, (_, idx) => {
       const reviewSeed = `${bookSeed}-review-${idx}`
       const reviewRng = seedrandom(reviewSeed)
@@ -61,7 +61,7 @@ export function generateBooks({ seed, page, region, likes, reviews }) {
       })
 
       return {
-        author: reviewFaker.name.fullName(),
+        author: reviewFaker.person.fullName(), // ✅ O'zgartirildi
         text: reviewFaker.lorem.sentences(2),
       }
     })
